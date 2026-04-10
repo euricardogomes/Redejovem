@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Rede Jovem | Notícias que conectam</title>
+    <!-- Google Fonts: Poppins + Inter para tipografia moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (gratuito, ícones redes sociais/hamburger) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefefe;
+            color: #111;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Cores base da identidade */
+        :root {
+            --azul-vibrante: #0A1BFF;
+            --vermelho-forte: #FF0000;
+            --branco: #FFFFFF;
+            --preto: #000000;
+            --cinza-claro: #f5f7fb;
+            --cinza-borda: #eaeef5;
+            --sombra-padrao: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+            --sombra-hover: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+            --transicao: all 0.25s ease;
+        }
+
+        /* Container padrão */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--branco);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03), 0 1px 0 var(--cinza-borda);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(0px);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--azul-vibrante) 30%, var(--vermelho-forte) 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+            display: block;
+            letter-spacing: normal;
+        }
+
+        /* Menu Desktop */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1e293b;
+            transition: var(--transicao);
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-links li a:hover {
+            color: var(--azul-vibrante);
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2.5px;
+            bottom: -6px;
+            left: 0;
+            background: var(--vermelho-forte);
+            transition: width 0.2s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger (mobile) */
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--preto);
+            transition: var(--transicao);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin: 32px 0 48px 0;
+        }
+
+        .hero-card {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            background: var(--branco);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--sombra-padrao);
+            transition: var(--transicao);
+        }
+
+        .hero-img {
+            background: linear-gradient(145deg, #00000020, #00000008), url('https://placehold.co/800x500/0A1BFF/white?text=GRANDE+NOTÍCIA+REDE+JOVEM') center/cover no-repeat;
+            min-height: 320px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-tag {
+            background: var(--vermelho-forte);
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            width: fit-content;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            color: var(--preto);
+        }
+
+        .hero-content p {
+            color: #2d3a4b;
+            margin-bottom: 28px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--azul-vibrante);
+            color: white;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: var(--transicao);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            width: fit-content;
+        }
+
+        .btn:hover {
+            background: #0008e6;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 18px -8px rgba(10, 27, 255, 0.4);
+        }
+
+        /* Seção Geral */
+        section {
+            margin: 60px 0;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-left: 6px solid var(--vermelho-forte);
+            padding-left: 20px;
+            margin-bottom: 32px;
+            color: #0f172a;
+        }
+
+        /* Grid Cards Destaque */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: var(--branco);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--sombra-padrao);
+            transition: var(--transicao);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.35s ease;
+        }
+
+        .news-card:hover .card-img {
+            transform: scale(1.02);
+        }
+
+        .card-content {
+            padding: 20px 22px 26px;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--vermelho-forte);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .card-content h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card-content p {
+            color: #334155;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .read-more {
+            font-weight: 700;
+            color: var(--azul-vibrante);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .read-more i {
+            font-size: 0.8rem;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+            color: var(--vermelho-forte);
+        }
+
+        /* Últimas Notícias + Sidebar (grid 2 colunas) */
+        .latest-sidebar {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .latest-feed {
+            background: var(--branco);
+            border-radius: 24px;
+            box-shadow: var(--sombra-padrao);
+            padding: 12px 0;
+        }
+
+        .feed-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--cinza-borda);
+            transition: background 0.2s;
+        }
+
+        .feed-item:hover {
+            background: #fafcff;
+        }
+
+        .feed-date {
+            min-width: 80px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--azul-vibrante);
+            background: #eef2ff;
+            padding: 4px 10px;
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .feed-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .feed-cat {
+            font-size: 0.7rem;
+            color: var(--vermelho-forte);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .sidebar-box {
+            background: var(--branco);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--sombra-padrao);
+        }
+
+        .sidebar-box h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .popular-list {
+            list-style: none;
+        }
+
+        .popular-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .popular-list li span {
+            font-weight: 800;
+            color: var(--azul-vibrante);
+            font-size: 1.2rem;
+        }
+
+        .categorias-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .categorias-links a {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .categorias-links a:hover {
+            background: var(--azul-vibrante);
+            color: white;
+        }
+
+        .ad-destaque {
+            background: linear-gradient(145deg, #0A1BFF08, #FF000008);
+            border: 1px dashed var(--azul-vibrante);
+            text-align: center;
+            padding: 24px 12px;
+            border-radius: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0b1120;
+            color: #e2e8f0;
+            padding: 48px 0 24px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFFFFF, #94a3b8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icons a {
+            color: white;
+            background: #1e293b;
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 12px;
+            transition: 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: var(--azul-vibrante);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid #1e2a3a;
+            font-size: 0.85rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            .hero-card {
+                grid-template-columns: 1fr;
+            }
+            .latest-sidebar {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                position: fixed;
+                top: 75px;
+                left: -100%;
+                width: 75%;
+                height: calc(100% - 75px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 28px;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                z-index: 99;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 18px;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        button, a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-bar">
+            <div class="logo">
+                <h1>REDE JOVEM</h1>
+                <span>Notícias que movem o futuro</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Notícias</a></li>
+                <li><a href="#">Política</a></li>
+                <li><a href="#">Tecnologia</a></li>
+                <li><a href="#">Entretenimento</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Banner Principal -->
+        <section class="hero">
+            <div class="hero-card">
+                <div class="hero-img" style="background-image: linear-gradient(115deg, #00000040, #00000020), url('https://placehold.co/800x500/0A1BFF/white?text=URGENTE:+Jovens+protagonizam+mudança'); background-size: cover;"></div>
+                <div class="hero-content">
+                    <span class="hero-tag">EXCLUSIVO</span>
+                    <h2>Geração Alpha e Z: como a tecnologia está moldando o novo ativismo digital</h2>
+                    <p>Movimentos nas redes sociais ganham força e conectam milhões de jovens em causas ambientais, sociais e políticas. Rede Jovem analisa o fenômeno que está mudando o mundo.</p>
+                    <a href="#" class="btn">Ler mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notícias em Destaque (Grid cards) -->
+        <section>
+            <div class="section-title">🔥 Destaques da semana</div>
+            <div class="cards-grid" id="destaquesGrid">
+                <!-- card 1 -->
+                <div class="news-card">
+                    <div class="card-img" style="background-image: url('https://placehold.co/600x400/FF0000/white?text=Eleicoes+2026');"></div>
+                    <div class="card-content">
+                        <div class="card-category">Política</div>
+                        <h3>Pré-campanha jovem: novos códigos eleitorais atraem primeira vez</h3>
+                        <p>Candidatos apostam em linguagem digital e engajam eleitores de 16 a 24 anos.</p>
+                        <a href="#" class="read-more">Ler matéria <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <!-- card 2 -->
+                <div class="news-card">
+                    <div class="card-img" style="background-image: url('https://placehold.co/600x400/0A1BFF/white?text=IA+no+mercado');"></div>
+                    <div class="card-content">
+                        <div class="card-category">Tecnologia</div>
+                        <h3>Inteligência artificial cria novas profissões; saiba quais</h3>
+                        <p>Prompts, curadoria de dados e ética em IA estão entre os empregos do futuro.</p>
+                        <a href="#" class="read-more">Ler matéria <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <!-- card 3 -->
+                <div class="news-card">
+                    <div class="card-img" style="background-image: url('https://placehold.co/600x400/000000/white?text=Festival+Musica');"></div>
+                    <div class="card-content">
+                        <div class="card-category">Entretenimento</div>
+                        <h3>Rock in Rio 2026 anuncia lineup com artistas globais e novidades</h3>
+                        <p>Evento promete experiência imersiva e sustentabilidade como bandeira.</p>
+                        <a href="#" class="read-more">Ler matéria <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <!-- card 4 -->
+                <div class="news-card">
+                    <div class="card-img" style="background-image: url('https://placehold.co/600x400/FF0000/white?text=Clima+Extremo');"></div>
+                    <div class="card-content">
+                        <div class="card-category">Meio Ambiente</div>
+                        <h3>Juventude climática: manifestações globais marcam Abril Verde</h3>
+                        <p>Estudantes pedem ação concreta contra aquecimento global.</p>
+                        <a href="#" class="read-more">Ler matéria <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <!-- card 5 -->
+                <div class="news-card">
+                    <div class="card-img" style="background-image: url('https://placehold.co/600x400/0A1BFF/white?text=Startups+BR');"></div>
+                    <div class="card-content">
+                        <div class="card-category">Economia Criativa</div>
+                        <h3>Startups lideradas por jovens faturam R$ 2 bi em 2025</h3>
+                        <p>Inovação e tecnologia impulsionam negócios com propósito.</p>
+                        <a href="#" class="read-more">Ler matéria <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <!-- card 6 -->
+                <div class="news-card">
+                    <div class="card-img" style="background-image: url('https://placehold.co/600x400/000000/white?text=Cultura+Geek');"></div>
+                    <div class="card-content">
+                        <div class="card-category">Entretenimento</div>
+                        <h3>Novos filmes e séries: o que vem por aí nos streamings</h3>
+                        <p>Produções brasileiras ganham destaque em plataformas globais.</p>
+                        <a href="#" class="read-more">Ler matéria <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Últimas Notícias + Sidebar -->
+        <section>
+            <div class="latest-sidebar">
+                <!-- Feed vertical Últimas -->
+                <div class="latest-feed">
+                    <div style="padding: 20px 24px 0 24px;"><h3 style="font-size: 1.5rem; font-weight: 700;">📰 Últimas notícias</h3></div>
+                    <div class="feed-item">
+                        <div class="feed-date">HOJE • 14:32</div>
+                        <div class="feed-info">
+                            <div class="feed-cat">Política</div>
+                            <h4>Proposta de meia-passagem interestadual para estudantes avança no Congresso</h4>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-date">HOJE • 11:15</div>
+                        <div class="feed-info">
+                            <div class="feed-cat">Tecnologia</div>
+                            <h4>Brasil lança programa de inclusão digital para escolas públicas até 2027</h4>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-date">ONTEM • 20:47</div>
+                        <div class="feed-info">
+                            <div class="feed-cat">Entretenimento</div>
+                            <h4>Anitta e Djonga encabeçam festival gratuito no Rio de Janeiro</h4>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-date">ONTEM • 09:03</div>
+                        <div class="feed-info">
+                            <div class="feed-cat">Saúde</div>
+                            <h4>Vacinação contra HPV atinge cobertura recorde entre jovens de 15 a 19 anos</h4>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-date">10 ABR • 18:22</div>
+                        <div class="feed-info">
+                            <div class="feed-cat">Tecnologia</div>
+                            <h4>Startup brasileira de energia limpa vence premiação internacional</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="sidebar-box">
+                        <h3>🔥 Mais lidas</h3>
+                        <ul class="popular-list">
+                            <li><span>1</span> Apagão cibernético: como proteger seus dados?</li>
+                            <li><span>2</span> Nova lei das redes sociais impacta influenciadores</li>
+                            <li><span>3</span> Vestibular 2026: universidades ampliam cotas</li>
+                            <li><span>4</span> Games: eSports movimentam bilhões no mundo</li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-box">
+                        <h3>Categorias</h3>
+                        <div class="categorias-links">
+                            <a href="#">Política</a>
+                            <a href="#">Tecnologia</a>
+                            <a href="#">Entretenimento</a>
+                            <a href="#">Esportes</a>
+                            <a href="#">Cultura</a>
+                            <a href="#">Saúde</a>
+                            <a href="#">Educação</a>
+                        </div>
+                    </div>
+                    <div class="sidebar-box ad-destaque">
+                        <i class="fas fa-bullhorn" style="font-size: 2rem; color: var(--azul-vibrante); margin-bottom: 8px; display: inline-block;"></i>
+                        <p style="font-weight: 700;">Espaço do Leitor</p>
+                        <small>Envie sua pauta: jovens@redejovem.ao</small>
+                        <div style="margin-top: 12px;"><a href="#" style="color: #0A1BFF;">Anuncie aqui →</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>REDE JOVEM</h3>
+                    <p style="margin-top: 10px; max-width: 260px;">Informação com credibilidade, atitude jovem e visão de futuro.</p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#">Sobre nós</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Código de Ética</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Anuncie</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Aplicativo</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de uso</a></li>
+                        <li><a href="#">Acessibilidade</a></li>
+                    </ul>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Rede Jovem — Todos os direitos reservados. Jornalismo independente e conectado à sua geração.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript para menu responsivo (hamburger) e pequenos efeitos -->
+    <script>
+        (function() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    // Ícone alternar (opcional)
+                    const icon = hamburger.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Fechar menu ao clicar em qualquer link (mobile)
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 900) {
+                            navLinks.classList.remove('active');
+                            const icon = hamburger.querySelector('i');
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+
+            // Simular leve interatividade nos cards (console apenas decorativo)
+            const cards = document.querySelectorAll('.news-card');
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if(e.target.tagName !== 'A' && !e.target.closest('.read-more')) {
+                        // Pequeno feedback visual, sem redirecionamento real (simulação)
+                        card.style.transition = '0.1s';
+                        card.style.transform = 'scale(0.99)';
+                        setTimeout(() => { card.style.transform = ''; }, 150);
+                    }
+                });
+            });
+            
+            // Animar scroll suave para links internos (caso existam)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== "#" && href !== "#!" && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
